@@ -122,7 +122,7 @@ export default function SkiSafetyMap() {
               {selectedResort && <span style={{ color: getRiskColor(selectedResort.risk) }}>{selectedResort.risk}</span>}
             </div>
 
-            <Mountain incidents={selectedResort?.incidents || 0} />
+            <Mountain resort={selectedResort} />
 
             {selectedResort && (
               <div className="resort-info">
