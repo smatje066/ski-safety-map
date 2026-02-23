@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { countries, skiResorts, safetyTips, avalancheLevels } from '../data/skiData';
+import { countries, skiResorts, safetyTips } from '../data/skiData';
 
 export default function SkiSafetyMap() {
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -29,7 +29,7 @@ export default function SkiSafetyMap() {
   return (
     <div className="ski-safety-container">
       <header className="header">
-        <motion.h1 
+        <motion.h1
           className="title"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function SkiSafetyMap() {
         >
           ⛷️ Lawine Veiligheidskaart
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="subtitle"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -52,7 +52,7 @@ export default function SkiSafetyMap() {
 
       <div className="main-content">
         <aside className="sidebar">
-          <motion.div 
+          <motion.div
             className="card"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -83,7 +83,7 @@ export default function SkiSafetyMap() {
 
           <AnimatePresence mode="wait">
             {selectedCountry && (
-              <motion.div 
+              <motion.div
                 className="card"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -92,23 +92,15 @@ export default function SkiSafetyMap() {
               >
                 <h2 className="card-title">🏔️ Skigebieden</h2>
                 <div className="resort-list">
-                  {currentResorts.map((resort, index) => (
+                  {currentResorts.map((resort) => (
                     <motion.div
                       key={resort.name}
                       className={`resort-item ${selectedResort?.name === resort.name ? 'selected' : ''}`}
                       onClick={() => handleResortSelect(resort)}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 * index, duration: 0.3 }}
-                      whileHover={{ scale: 1.02, x: 5 }}
+                      whileHover={{ scale: 1.02 }}
                     >
                       <span className="resort-name">{resort.name}</span>
-                      <span 
-                        className="resort-risk"
-                        style={{ backgroundColor: selectedResort?.name === resort.name ? 'rgba(255,255,255,0.3)' : getRiskColor(resort.risk) + '20', color: selectedResort?.name === resort.name ? '#fff' : getRiskColor(resort.risk) }}
-                      >
-                        {resort.risk}
-                      </span>
+                      <span className="resort-risk">{resort.risk}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -118,7 +110,7 @@ export default function SkiSafetyMap() {
         </aside>
 
         <main className="main-display">
-          <motion.div 
+          <motion.div
             className="display-card"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,71 +118,66 @@ export default function SkiSafetyMap() {
           >
             <div className="display-title">
               <span>🏔️ {selectedResort ? selectedResort.name : 'Selecteer een skigebied'}</span>
-              {selectedResort && (
-                <span style={{ 
-                  backgroundColor: getRiskColor(selectedResort.risk) + '20', 
-                  color: getRiskColor(selectedResort.risk),
-                  padding: '0.5rem 1rem',
-                  borderRadius: '2rem',
-                  fontSize: '0.875rem'
-                }}>
-                  Risico: {selectedResort.risk}
-                </span>
-              )}
+              {selectedResort && <span style={{ color: getRiskColor(selectedResort.risk) }}>{selectedResort.risk}</span>}
             </div>
 
-            {/* Animated Mountain */}
             <div className="mountain-container">
               <div className="mountain">
-                <div className="mountain-base"></div>
                 <div className="mountain-peak"></div>
                 <div className="mountain-snow"></div>
-                
-                {/* Incident Markers */}
+
                 {selectedResort && selectedResort.incidents > 0 && (
-                  <>
-                    {[...Array(Math.min(selectedResort.incidents, 3))].map((_, i) => (
+                  <div className="incident-markers">
+                    {[...Array(selectedResort.incidents)].map((_, i) => (
                       <motion.div
                         key={i}
                         className="incident-marker"
                         style={{
-                          bottom: `${150 + i * 40}px`,
-                          left: `${50 + (i - 1) * 40}px`,
+                          bottom: `${120 + i * 50}px`,
+                          left: `${30 + i * 80}px`,
                         }}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ delay: 0.5 + i * 0.2, type: 'spring' }}
-                        whileHover={{ scale: 1.3 }}
-                        title={`Incident locatie ${i + 1}`}
+                        transition={{ delay: i * 0.2 }}
                       >
                         ⚠️
                       </motion.div>
                     ))}
-                  </>
+                  </div>
                 )}
               </div>
             </div>
 
             {selectedResort && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: 'rgba(0,0,0,0.05)', borderRadius: '1rem' }}
-              >
+              <div className="resort-info">
                 <p><strong>Hoogte:</strong> {selectedResort.elevation}</p>
-                <p><strong>Lawine risico:</strong> <span style={{ color: getRiskColor(selectedResort.risk) }}>{selectedResort.risk}</span></p>
-                <p><strong>Gemelde incidenten (2024):</strong> {selectedResort.incidents}</p>
-              </motion.div>
+                <p><strong>Lawine risico:</strong> {selectedResort.risk}</p>
+                <p><strong>Incidenten:</strong> {selectedResort.incidents}</p>
+              </div>
             )}
           </motion.div>
 
-          {/* Safety Tips */}
-          <motion.div 
-            className="card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.4 }}
-          >
+          <div className="card">
             <h2 className="card-title">🛡️ Veiligheidstips</h2>
             <div className="tips-grid">
-              {s
+              {safetyTips.map((tip, index) => (
+                <motion.div
+                  key={index}
+                  className="tip-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="tip-icon">{tip.icon}</div>
+                  <div className="tip-title">{tip.title}</div>
+                  <div className="tip-text">{tip.text}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
