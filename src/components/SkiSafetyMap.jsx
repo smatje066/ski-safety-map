@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { countries, skiResorts, safetyTips } from '../data/skiData';
+import Mountain from './Mountain';
 
 export default function SkiSafetyMap() {
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -121,32 +122,7 @@ export default function SkiSafetyMap() {
               {selectedResort && <span style={{ color: getRiskColor(selectedResort.risk) }}>{selectedResort.risk}</span>}
             </div>
 
-            <div className="mountain-container">
-              <div className="mountain">
-                <div className="mountain-peak"></div>
-                <div className="mountain-snow"></div>
-
-                {selectedResort && selectedResort.incidents > 0 && (
-                  <div className="incident-markers">
-                    {[...Array(selectedResort.incidents)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="incident-marker"
-                        style={{
-                          bottom: `${120 + i * 50}px`,
-                          left: `${30 + i * 80}px`,
-                        }}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: i * 0.2 }}
-                      >
-                        ⚠️
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            <Mountain incidents={selectedResort?.incidents || 0} />
 
             {selectedResort && (
               <div className="resort-info">
