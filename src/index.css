@@ -1,15 +1,38 @@
 /* Ski Safety Map Styles - Enhanced */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
 
-/* Ski Safety Map Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e0f2fe 50%, #f3e8ff 100%);
+  padding: 1rem;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 2rem);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
 .ski-safety-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* Header */
 .header {
   text-align: center;
   padding-bottom: 1.5rem;
@@ -25,7 +48,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
 }
 
 .subtitle {
@@ -33,15 +55,13 @@
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto;
-  line-height: 1.6;
-  font-weight: 400;
 }
 
 .warning-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
   color: #dc2626;
   padding: 0.6rem 1.25rem;
@@ -49,10 +69,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   margin-top: 1rem;
-  font-family: 'Inter', sans-serif;
 }
 
-/* Main Layout */
 .main-content {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -65,7 +83,6 @@
   }
 }
 
-/* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -78,7 +95,7 @@
   border-radius: 1.5rem;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .card-title {
@@ -87,12 +104,8 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-/* Country Buttons */
 .country-list {
   display: flex;
   flex-direction: column;
@@ -108,7 +121,7 @@
   border: 2px solid transparent;
   border-radius: 1rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   text-align: left;
   width: 100%;
   font-family: 'Inter', sans-serif;
@@ -118,37 +131,13 @@
   background: #ffffff;
   border-color: #3b82f6;
   transform: translateX(8px);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
 }
 
 .country-btn.active {
   background: linear-gradient(135deg, #3b82f6, #6366f1);
   color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
-.country-flag {
-  font-size: 1.75rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
-
-.country-info {
-  flex: 1;
-}
-
-.country-name {
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.country-resorts {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  font-weight: 500;
-}
-
-/* Resort List */
 .resort-list {
   display: flex;
   flex-direction: column;
@@ -163,43 +152,23 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: 'Inter', sans-serif;
 }
 
 .resort-item:hover {
   background: rgba(255, 255, 255, 1);
   border-color: #3b82f6;
   transform: scale(1.02);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .resort-item.selected {
   background: linear-gradient(135deg, #3b82f6, #6366f1);
   color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
-.resort-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.resort-risk {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.3);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* Main Display */
 .main-display {
   display: flex;
   flex-direction: column;
@@ -212,10 +181,7 @@
   border-radius: 1.5rem;
   padding: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.05);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .display-title {
@@ -229,7 +195,6 @@
   justify-content: space-between;
 }
 
-/* Mountain Animation - Enhanced SVG Style */
 .mountain-container {
   position: relative;
   height: 400px;
@@ -238,80 +203,26 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 1.5rem;
-  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 20%, #e0f2fe 50%, #f0f9ff 80%, #fff 100%);
+  background: linear-gradient(180deg, #7dd3fc 0%, #e0f2fe 50%, #f0f9ff 100%);
 }
 
 .mountain-svg {
   width: 100%;
-  max-width: 500px;
   height: 100%;
 }
 
-/* Incident Markers */
-.incident-markers {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.incident-marker {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  border: 3px solid white;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5), 0 0 0 4px rgba(239, 68, 68, 0.2);
-  animation: pulse-incident 2s infinite;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.incident-marker:hover {
-  transform: scale(1.25);
-  z-index: 20;
-  box-shadow: 0 12px 35px rgba(239, 68, 68, 0.6);
-}
-
-@keyframes pulse-incident {
-  0%, 100% {
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5), 0 0 0 0 rgba(239, 68, 68, 0.4);
-  }
-  50% {
-    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5), 0 0 0 15px rgba(239, 68, 68, 0);
-  }
-}
-
-/* Resort Info */
 .resort-info {
   margin-top: 1.5rem;
   padding: 1.25rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
 }
 
 .resort-info p {
   margin: 0.6rem 0;
   color: #374151;
-  font-size: 0.95rem;
 }
 
-.resort-info strong {
-  color: #1e293b;
-  font-weight: 600;
-}
-
-/* Safety Tips */
 .tips-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -319,12 +230,11 @@
 }
 
 .tip-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 1rem;
   padding: 1.5rem;
   border-left: 4px solid #3b82f6;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .tip-card:hover {
@@ -336,7 +246,6 @@
 .tip-icon {
   font-size: 1.75rem;
   margin-bottom: 0.75rem;
-  display: block;
 }
 
 .tip-title {
@@ -344,39 +253,20 @@
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
 }
 
 .tip-text {
   font-size: 0.875rem;
   color: #64748b;
   line-height: 1.6;
-  font-weight: 400;
 }
 
-/* Legend */
-.legend {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .app-container {
+    padding: 1rem;
+  }
 }
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #64748b;
-}
-
-.legend-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-}
-
-/* Loading State */
-.loading-container {
-  display:
